@@ -10,9 +10,9 @@ import { base64url } from 'rfc4648';
 export async function signJwt(
   payload: { [k: string]: any },
   secret: string,
-  alg: string
+  alg = 'HS256'
 ): Promise<String> {
-  const importAlgorithm = algorithms['alg'];
+  const importAlgorithm = algorithms[alg];
   if (!importAlgorithm) throw new Error('algorithm not found');
   payload.iat = Math.floor(Date.now() / 1000);
   const payloadAsJSON = JSON.stringify(payload);
