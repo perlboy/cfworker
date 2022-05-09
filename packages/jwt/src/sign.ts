@@ -21,8 +21,9 @@ export async function signJwt(
       JSON.stringify({
         alg: alg
       })
-    )
-  )}.${base64url.stringify(_utf8ToUint8Array(payloadAsJSON))}`;
+    ),
+    { pad: false }
+  )}.${base64url.stringify(_utf8ToUint8Array(payloadAsJSON), { pad: false })}`;
   const keyData = _utf8ToUint8Array(secret);
   const key = await crypto.subtle.importKey(
     'raw',
@@ -36,7 +37,9 @@ export async function signJwt(
     key,
     _utf8ToUint8Array(partialToken)
   );
-  return `${partialToken}.${base64url.stringify(new Uint8Array(signature))}`;
+  return `${partialToken}.${base64url.stringify(new Uint8Array(signature), {
+    pad: false
+  })}`;
 }
 
 function _utf8ToUint8Array(str: string) {
