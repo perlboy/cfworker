@@ -40,5 +40,5 @@ export async function signJwt(
 }
 
 function _utf8ToUint8Array(str: string) {
-  return base64url.parse(btoa(decodeURI(encodeURIComponent(str))));
+  return base64url.parse(btoa(decodeURIComponent(encodeURIComponent(str))));
 }
